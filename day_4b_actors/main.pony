@@ -77,7 +77,6 @@ actor Main
     let contentlines: Array[String] ref = content.split_by("\n")
     split_into_boards(contentlines)
 
-
   /* Takes the contents of the boards file and repeatedly calls
    * extract_board() until the contentlines array is empty.
    *
@@ -130,7 +129,6 @@ actor Main
       findresults()
     end
 
-
   /* The adventofcode requirement is to find the Game Boards which
    * took the most and the least number of moves to win.
    *
@@ -138,7 +136,6 @@ actor Main
    * and lowest scores and associated digest of the Actor.
    *
    * From that digest, we can look up the checksum result          */
-
   fun findresults() =>
     var smallfinal: USize = 0 ; var smallestscore: USize = -1
     var largefinal: USize = 0 ; var largestscore:  USize = 0
