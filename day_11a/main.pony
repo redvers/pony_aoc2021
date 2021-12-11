@@ -12,7 +12,7 @@ actor Main
       docto.displayField()
       for cnt in Range(1, 1000+1) do
         env.out.print("Generation: " + cnt.string())
-			  docto.step()?
+        docto.step()?
         docto.displayField()
         env.out.print("")
       end
@@ -56,23 +56,23 @@ class DumboOcto
     drain_flashers()?
     all_zeros()?
 
-	fun ref all_zeros()? =>
+  fun ref all_zeros()? =>
     var tot: USize = 0
-		for yptr in Range(0, field.size()) do
-			for xptr in Range(0, field(yptr)?.size()) do
-				tot = tot + field(yptr)?(xptr)?.usize()
-			end
-		end
+    for yptr in Range(0, field.size()) do
+      for xptr in Range(0, field(yptr)?.size()) do
+        tot = tot + field(yptr)?(xptr)?.usize()
+      end
+    end
     if (tot == 0) then env.out.print("SYNCRONIZED FLASH") ; error end
 
-	fun ref check_flash()? =>
-		for yptr in Range(0, field.size()) do
-			for xptr in Range(0, field(yptr)?.size()) do
-				if (field(yptr)?(xptr)? > 9) then
+  fun ref check_flash()? =>
+    for yptr in Range(0, field.size()) do
+      for xptr in Range(0, field(yptr)?.size()) do
+        if (field(yptr)?(xptr)? > 9) then
           bump_neighbors(yptr, xptr)
         end
-			end
-		end
+      end
+    end
 
   fun ref bump_neighbors(yptr: USize, xptr: USize) =>
     try bump_neighbor(yptr + 1, xptr - 1)? end
@@ -92,21 +92,21 @@ class DumboOcto
       field(yptr)?.update(xptr, oldval + 1)?
     end
 
-	fun ref drain_flashers()? =>
-		for yptr in Range(0, field.size()) do
-			for xptr in Range(0, field(yptr)?.size()) do
-				let oldval: U8 = field(yptr)?(xptr)?
+  fun ref drain_flashers()? =>
+    for yptr in Range(0, field.size()) do
+      for xptr in Range(0, field(yptr)?.size()) do
+        let oldval: U8 = field(yptr)?(xptr)?
         if (oldval > 9) then field(yptr)?.update(xptr, 0)? end
-			end
-		end
+      end
+    end
 
-	fun ref increment_all()? =>
-		for yptr in Range(0, field.size()) do
-			for xptr in Range(0, field(yptr)?.size()) do
-				let oldval: U8 = field(yptr)?(xptr)?
-				field(yptr)?.update(xptr, oldval + 1)?
-			end
-		end
+  fun ref increment_all()? =>
+    for yptr in Range(0, field.size()) do
+      for xptr in Range(0, field(yptr)?.size()) do
+        let oldval: U8 = field(yptr)?(xptr)?
+        field(yptr)?.update(xptr, oldval + 1)?
+      end
+    end
 
   fun displayField() =>
     for y in field.values() do
